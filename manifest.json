@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Tmall-tickets",
+  "version": "1.0",
+  "description": "天猫超市抢购茅台",
+  "action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage", "activeTab", "scripting"]
+}
