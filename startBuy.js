@@ -3,26 +3,26 @@ function start(){
     if(href.indexOf('cart.taobao.com') > -1 || href.indexOf('cart.tmall.com') > -1){
         //结算页面
         //进入时间判断
-        enterTimeCheckLoop(checkElementState("J_Go"));
+        enterTimeCheckLoop();
     }else if(href.indexOf('buy.taobao.com') > -1 || href.indexOf('buy.tmall.com') > -1 ){
         //提交订单页面
         checkElementState("go-btn");
     }else{
-        enterTimeCheckLoop(checkElementState(waitKey));
+        enterTimeCheckLoop();
     }
 }
 //进入时间判断循环
-function enterTimeCheckLoop(callback){
+function enterTimeCheckLoop(){
     var date = new Date();
     var diff = targetTimeNumber - date;
     console.log("剩余毫秒数："+diff);
     if(diff < - timeEnd ){
         console.log('时间过了！');
     }else if(diff < timeStart ) {
-        callback && callback();
+        checkElementState(waitKey);
         console.log('时间到了！！！');
     }else{
-        setTimeout(function(){ enterTimeCheckLoop(callback);},scanTime);
+        setTimeout(function(){ enterTimeCheckLoop();},scanTime);
     }
 }
 //检测按钮在不在，在就点下去
