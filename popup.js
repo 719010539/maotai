@@ -21,20 +21,30 @@ Date.prototype.format = function(fmt) {
 
 // -----操作面板
 function construct() {
-  // 修改时间
-  let tt = document.getElementById("targetTime");
-  chrome.storage.sync.get("targetTime", ({ targetTime }) => {
-    tt.value = new Date(targetTime).format("hh:mm:ss.S");;
+  // 配置载入
+  chrome.storage.sync.get("config", ({ config }) => {
+    document.getElementById("targetTime").value = new Date(config.targetTime).format("hh:mm:ss");
+    document.getElementById("waitKey").value = config.waitKey;
+    document.getElementById("timeStart").value = config.timeStart;
+    document.getElementById("timeEnd").value = config.timeEnd;
+    document.getElementById("scanTime").value = config.scanTime;
   });
-  tt.addEventListener("change",()=>{
-    let times = document.getElementById("targetTime").value.split(":")
-    let targetTime = new Date().setHours(times[0],times[1],times[2].split(".")[0],times[2].split(".")[1])
-    chrome.storage.sync.set({targetTime});
-  })
 
   //开始执行按键
   let button = document.getElementById("run");
   button.addEventListener("click", async () => {
+    // 1、保存修改
+    let times = document.getElementById("targetTime").value.split(":")
+    let time = new Date().setHours(times[0],times[1],times[2])
+    let config = {
+      targetTime:time,
+      waitKey: document.getElementById("waitKey").value,
+      timeStart: parseInt(document.getElementById("timeStart").value),
+      timeEnd: parseInt(document.getElementById("timeEnd").value),
+      scanTime: parseInt(document.getElementById("scanTime").value),
+    }
+    chrome.storage.sync.set({config});
+    // 2、开始执行
    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     chrome.scripting.executeScript({
       target: { tabId: tab.id },

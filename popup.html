@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
 <html>
   <body>
     <div id="ChangeTime">
-      <input id="targetTime">
-      <button id="run">run</button>
+      目标时间：<input id="targetTime">
+      需要点击的ElementId：<input id="waitKey">
+      提前多少毫秒开始按：<input id="timeStart">
+      超过多少毫秒停止按：<input id="timeEnd">
+      多少毫秒check一下时间：<input id="scanTime">
+      <button id="run">开始执行</button>
     </div>
     <script src="popup.js"></script>
   </body>

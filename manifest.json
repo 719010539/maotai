@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Tmall-tickets",
+  "name": "Click",
   "version": "1.0",
-  "description": "天猫超市抢购茅台",
+  "description": "定时点击工具",
   "action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
